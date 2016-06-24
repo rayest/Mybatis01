@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射命名空间，persistence-->
+<mapper namespace="cn.rayest.persistence.StudentPersistence">
+
+<!--自定义查询结果集合-->
+	<resultMap id="StudentResult" type="Student">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+	</resultMap>
+
+
+<!--StudentMapper的insert方法（add），parameterType是参数类型-->
+	<!--添加学生-->
+	<insert id="add" parameterType="Student"  >
+		insert into t_students values(null,#{name},#{age})
+	</insert>
+
+	<!--修改学生-->
+	<update id="update" parameterType="Student">
+		UPDATE t_students SET name=#{name}, age=#{age} WHERE id=#{id}
+	</update>
+
+	<!--删除学生-->
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM t_students WHERE id=#{id}
+    </delete>
+<!--通过id查找学校生-->
+	<select id="findById" parameterType="Integer" resultType="Student">
+		SELECT * from t_students WHERE id=#{id}
+	</select>
+
+	<select id="find" resultMap="StudentResult">
+		SELECT * FROM t_students
+	</select>
+
+
+</mapper>
