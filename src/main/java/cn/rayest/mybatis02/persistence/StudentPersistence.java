@@ -1,6 +1,6 @@
-package cn.rayest.persistence;
+package cn.rayest.mybatis02.persistence;
 
-import cn.rayest.model.Student;
+import cn.rayest.mybatis02.model.Student;
 
 import java.util.List;
 
@@ -15,4 +15,8 @@ public interface StudentPersistence {
     int delete(Integer id);
     Student findById(Integer id);
     List<Student> find();
+
+    Student findStudentWithAddress(Integer id);
+
+    Student findByGradeId(Integer gradeId);
 }

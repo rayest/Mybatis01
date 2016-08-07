@@ -6,10 +6,7 @@
 <!--namespace, 映射命名空间，作用就是对 sql 进行分类化管理，persistence-->
 <mapper namespace="cn.rayest.mybatis02.persistence.StudentPersistence">
 
-    <!--自定义查询结果集合-->
-
-    <!--
-
+    <!-- 自定义查询结果集合
         <resultMap type="Address" id="AddressResult">
             <result property="id" column="id"/>
             <result property="province" column="province"/>
@@ -23,7 +20,6 @@
             <result property="age" column="age"/>
             <association property="address" resultMap="AddressResult"/>
         </resultMap>
-
     -->
 
     <resultMap type="Student" id="StudentResult">
@@ -33,6 +29,7 @@
 
         <association property="address" column="addressId"
                      select="cn.rayest.mybatis02.persistence.AddressPersistence.findById"></association>
+
         <association property="grade" column="gradeId"
                      select="cn.rayest.mybatis02.persistence.GradePersistence.findById"></association>
     </resultMap>
