@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射命名空间，persistence-->
+<mapper namespace="cn.rayest.mybatis02.persistence.AddressPersistence">
+
+	<resultMap type="Address" id="AddressResult">
+		<result property="id" column="id"/>
+		<result property="province" column="province"/>
+		<result property="city" column="city"/>
+		<result property="district" column="district"/>
+	</resultMap>
+
+	<select id="findById" parameterType="Integer" resultType="Address">
+		select * from t_address where id=#{id}
+	</select>
+
+
+
+</mapper>

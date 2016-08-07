@@ -25,10 +25,12 @@
         </resultMap>
 
     -->
+
     <resultMap type="Student" id="StudentResult">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="age" column="age"/>
+
         <association property="address" column="addressId"
                      select="cn.rayest.mybatis02.persistence.AddressPersistence.findById"></association>
         <association property="grade" column="gradeId"
