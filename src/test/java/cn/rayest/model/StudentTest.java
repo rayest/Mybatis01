@@ -1,78 +1,91 @@
 package cn.rayest.model;
 
+import cn.rayest.persistence.GradePersistence;
 import cn.rayest.persistence.StudentPersistence;
 import cn.rayest.util.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * Created by Rayest on 2016/6/24 0024.
  */
 public class StudentTest {
-    private static Logger logger = Logger.getLogger(StudentTest.class);
     private SqlSession sqlSession = null;
     private StudentPersistence studentPersistence = null;
+    private GradePersistence gradePersistence = null;
 
-    /**
-    * 测试方法前调用
-     * */
     @Before
-    public void setUp(){
+    public void setUp() {
         sqlSession = SqlSessionFactoryUtil.openSession();
         studentPersistence = sqlSession.getMapper(StudentPersistence.class);
+        gradePersistence = sqlSession.getMapper(GradePersistence.class);
     }
 
-    /**
-     * 测试方法后调用
-     * */
     @After
-    public void tearDown(){
+    public void tearDown() {
         sqlSession.close();
     }
 
     @Test
-    public void testAdd(){
-        logger.info("添加学生");
+    public void testAdd() {
         Student student = new Student("Paris", 20);
         studentPersistence.add(student);
         sqlSession.commit();
     }
 
     @Test
-    public void testUpdate(){
-        logger.info("修改学生");
+    public void testUpdate() {
         Student student = new Student(9, "Candy Pay", 22);
         studentPersistence.update(student);
         sqlSession.commit();
     }
 
     @Test
-    public void testDelete(){
-        logger.info("删除学生");
+    public void testDelete() {
         studentPersistence.delete(11);
         sqlSession.commit();
     }
 
     @Test
-    public void testFindById(){
-        logger.info("通过id查找学校生");
+    public void testFindById() {
         Student student = studentPersistence.findById(5);
-        //不用提交：sqlSession.commit();
+        assertEquals("Pay", student.getName());
+        // sqlSession.commit();
         System.out.println(student);
     }
 
     @Test
-    public void testFind(){
-        logger.info("查找所有学生");
+    public void testFind() {
         List<Student> studentList = studentPersistence.find();
-        for(Student student: studentList){
+        for (Student student : studentList) {
             System.out.println(student);
         }
+    }
+
+    @Test
+    public void testFindStudentWithAddress() {
+        Student student = studentPersistence.findStudentWithAddress(1);
+        // assertEquals("Ray", student.getName());
+        System.out.println(student);
+    }
+
+    @Test
+    public void testFindGradeWithStudents() {
+        Grade grade = gradePersistence.findById(2);
+        System.out.println(grade);
+    }
+
+    @Test
+    public void testFindStudentWithGrade() {
+        Student student = studentPersistence.findStudentWithAddress(2);
+        // assertEquals("Ray", student.getName());
+        System.out.println(student);
     }
 }

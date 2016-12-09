@@ -19,9 +19,8 @@ public class Application {
         Student student = new Student("Candy", 21);
         int result = studentPersistence.add(student);
         sqlSession.commit();
-        if (result > 0){
-            logger.info("Ìí¼Ó³É¹¦");
-//            System.out.println("Ìí¼Ó³É¹¦£¡");
+        if (result > 0) {
+            logger.info("ï¿½ï¿½Ó³É¹ï¿½");
         }
     }
 }

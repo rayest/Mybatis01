@@ -1,4 +1,4 @@
-package cn.rayest.mybatis02.model;
+package cn.rayest.model;
 
 /**
  * Created by Rayest on 2016/6/24 0024.

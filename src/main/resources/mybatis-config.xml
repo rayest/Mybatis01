@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <!--配置相关文件-->
 <configuration>
-	<!--配置jdbc.properties-->
-	<properties resource="jdbc.properties"/>
-	<!--配置别名，方便mapper中用，否则会在mapper.xml文件用一大串cn.rayest.model.Student-->
-	<!--但这样的做法只能针对单个类别名-->
-	<typeAliases>
-		<typeAlias alias="Student" type="cn.rayest.model.Student"/>
-	</typeAliases>
 
-<!--这样的配置则更加简单，实用：扫描所有该包下的类
-	<typeAliases>
-		<package name="cn.rayest.model"/>
-	</typeAliases>
--->
-	<!--配置开发环境-->
-	<environments default="development">
-		<environment id="development">
-			<!--事务管理-->
-			<transactionManager type="JDBC" />
-			<!--配置数据源，数据池-->
-			<dataSource type="POOLED">
-				<property name="driver" value="${jdbc.driverClassName}" />
-				<property name="url" value="${jdbc.url}" />
-				<property name="username" value="${jdbc.username}" />
-				<property name="password" value="${jdbc.password}" />
-			</dataSource>
-		</environment>
-	</environments>
+    <!-- 1. 配置 jdbc.properties-->
+    <properties resource="jdbc.properties"/>
 
-	<!--引入映射文件，正确的路径-->
-	<mappers>
-		<mapper resource="StudentMapper.xml" />
-		<!--或者：<mapper class="cn.rayest.persistence.StudentMapper"/>-->
-		<!--最好：或者：<package name="cn.rayest.mybatis"/>-->
-	</mappers>
+    <!--
+    <typeAliases>
+        <typeAlias alias="Student" type="Student"/>
+        <typeAlias alias="Address" type="Address"/>
+    </typeAliases>
+    -->
+
+    <!-- 这样的配置则更加简单，实用：扫描所有该包下的类 -->
+    <typeAliases>
+        <package name="cn.rayest.mybatis02.model"/>
+    </typeAliases>
+
+    <!-- 3. 配置开发环境，可配置多个 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 事务管理 -->
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据源，数据池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 4. 加载映射文件，正确的路径 -->
+    <mappers>
+        <mapper resource="StudentMapper.xml"/>
+        <!-- 或者：<mapper class="StudentPersistence"/>-->
+        <!-- 最好：或者：<package name="cn.rayest..."/>-->
+        <mapper resource="AddressMapper.xml"/>
+        <mapper resource="GradeMapper.xml"/>
+        <mapper resource="mybatis03-StudentMapper.xml"/>
+    </mappers>
 
 </configuration>

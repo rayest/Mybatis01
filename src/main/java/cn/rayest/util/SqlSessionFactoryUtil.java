@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Rayest on 2016/6/24 0024.
@@ -13,9 +14,9 @@ import java.io.IOException;
 public class SqlSessionFactoryUtil {
     private static SqlSessionFactory sqlSessionFactory;
 
-    public static SqlSessionFactory getSqlSessionFactory(){
-        if (sqlSessionFactory == null){
-            java.io.InputStream inputStream = null;
+    public static SqlSessionFactory getSqlSessionFactory() {
+        if (sqlSessionFactory == null) {
+            InputStream inputStream = null;
             try {
                 inputStream = Resources.getResourceAsStream("mybatis-config.xml");
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -26,8 +27,7 @@ public class SqlSessionFactoryUtil {
         return sqlSessionFactory;
     }
 
-    public static SqlSession openSession(){
+    public static SqlSession openSession() {
         return getSqlSessionFactory().openSession();
     }
-
 }
